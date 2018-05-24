@@ -1,10 +1,10 @@
-# BitTorrent Sync API v2 Tutorial
+# Resilio Sync API v2 Tutorial
 
 ### Getting Started
-For instructions on installing BitTorrent Sync, requesting an API key, and everything else you need to get you up and running, click [here](http://www.getsync.com/api/getting-started).
+For instructions on installing Sync, requesting an API key, and everything else you need to get you up and running, click [here](http://www.getsync.com/api/getting-started).
 
 ### API commands
-Once you have BitTorrent Sync up and running, we can now test some API commands. First, we can add a local folder to sync. There are multiple ways you can pass in data. For the examples, I will be adding a folder of books I want to share.
+Once you have Sync up and running, we can now test some API commands. First, we can add a local folder to sync. There are multiple ways you can pass in data. For the examples, I will be adding a folder of books I want to share.
 ```
 POST /folders
 ```
@@ -121,7 +121,7 @@ Send the link to another device or a friend that is using Sync and you are on yo
 Suppose we have a fire station with x number of fire trucks. The fire station will share a folder with all the fire trucks that will contain information to help them stay up to date. The fire station wants to constantly know if each fire truck is in sync and has recieved the new files in the folder. This sample application will help us accomplish this scenario.
 
 ### Setup folders
-The BitTorrent Sync client needs to be installed on all systems (fire station and fire trucks). Using the BitTorrent Sync client on the main client (fire station) , add the folder you want to keep in sync. We will call this the Sync folder. Also, we need to add a second folder. This folder can be located anywhere and we will call it the Status folder. We now need to share these folders with all the peers (fire trucks). The Sync folder can be read only. The Status folder needs to have read/write permissions.
+Resilio Sync client needs to be installed on all systems (fire station and fire trucks). Using the BitTorrent Sync client on the main client (fire station) , add the folder you want to keep in sync. We will call this the Sync folder. Also, we need to add a second folder. This folder can be located anywhere and we will call it the Status folder. We now need to share these folders with all the peers (fire trucks). The Sync folder can be read only. The Status folder needs to have read/write permissions.
 
 The Status folder is needed to keep the hash state of the Sync folder for each peer. We use this folder hash to check if a folder is in sync. We do this because we assume fire trucks will be driving around and in and out of connectivity and may not always be able to communicate directly with the main client. Storing the most recent state of each peer in this Status folder will allow the main client to always have access to the latest state of each peer.
 
@@ -182,11 +182,11 @@ $ curl -X GET http://localhost:8888/api/v2/folders
 Get the shareid for the Sync and Status folders and copy them into the sync_api_sample/helper.py file into the variables SYNC_FOLDER_SHARE_ID and STATUS_FOLDER_SHARE_ID.
 
 ### Setup peers
-Along with having BitTorrent Sync installed, each peer(fire truck) needs to run a helper script located at sync_api_sample/helper.py.
+Along with having Sync installed, each peer(fire truck) needs to run a helper script located at sync_api_sample/helper.py.
 ```sh
 $ python sync_api_sample/helper.py --peer
 ```
-This runs a script that will listen to BitTorrent Sync events, and on specific folder change events, will update the Status folder with an updated text file containing its current hash of the Sync folder along with some other information. It will name the file based on its peer id.
+This runs a script that will listen to Sync events, and on specific folder change events, will update the Status folder with an updated text file containing its current hash of the Sync folder along with some other information. It will name the file based on its peer id.
 
 ### Setup main client
 The main client (fire station) needs to run the following
@@ -194,6 +194,3 @@ The main client (fire station) needs to run the following
 $ sudo python runserver.py
 ```
 Now open your webbrowser and go to 'http://127.0.0.1/'. There you should see a Sync Dashboard that displays the sync state of each peer. It gets this information by pulling the peer text files in the Status folder and checking the hash value in those files and comparing them with its current hash value on the Sync Folder.
-
-![Sync Dashboard](https://github.com/bittorrent/sync_api_sample/blob/master/Dashboard%20Sample.png)
-
