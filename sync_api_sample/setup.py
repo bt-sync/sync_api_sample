@@ -12,8 +12,8 @@ depends = [
 setup(name='sync-sample',
       version='0.0.1',
       author='Jeffrey Hwang',
-      author_email='jhwang@bittorrent.com',
-      url='http://bittorrent.com',
+      author_email='support@resilio.com',
+      url='https://resilio.com',
       packages = find_packages(),
       install_requires=depends
 )

@@ -1,9 +1,9 @@
 {
   "name": "sync-sample",
   "version": "0.0.1",
-  "homepage": "https://github.com/bittorrent/sync-sample",
+  "homepage": "https://resilio.com",
   "authors": [
-    "Jeffrey Hwang <jhwang@bittorrent.com>"
+    "Jeffrey Hwang <support@resilio.com>"
   ],
   "license": "MIT",
   "dependencies": {
